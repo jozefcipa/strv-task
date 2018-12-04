@@ -24,4 +24,7 @@ module.exports = {
 			'func-names': 'off',
 		},
 	}],
+	env: {
+		jest: true
+	}
 }

@@ -1,6 +1,7 @@
 .idea/
 node_modules/
 docker/data
+coverage/
 
 *.log
 .env

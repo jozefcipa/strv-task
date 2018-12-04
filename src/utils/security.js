@@ -52,10 +52,7 @@ const verifyAccessToken = async accessToken => {
     )
     return result.data
   } catch (err) {
-    if (err instanceof jwt.JsonWebTokenError) {
-      throw new UnauthorizedError({}, err.message)
-    }
-    throw err
+    throw new UnauthorizedError({}, err.message)
   }
 }
 

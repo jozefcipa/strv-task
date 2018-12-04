@@ -12,7 +12,7 @@ const { httpCodes } = require('../utils/http')
  */
 const createContact = async ctx => {
   const input = ctx.request.body
-  input.user_id = ctx.user._id
+  input.userId = ctx.user._id // eslint-disable-line no-underscore-dangle
   validate(input, newContactSchema)
   ctx.status = httpCodes.CREATED
   ctx.body = await operations.createContact(input)

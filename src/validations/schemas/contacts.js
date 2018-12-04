@@ -28,7 +28,7 @@ const newContactSchema = {
   phone: Joi.string().regex(phoneRegex),
   email: Joi.string().email().required(),
   note: Joi.string().max(500).allow(''),
-  user_id: Joi.string().required(),
+  userId: Joi.string().required(),
 }
 
 module.exports = {
