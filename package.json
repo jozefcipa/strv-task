@@ -10,6 +10,7 @@
     "dev": "nodemon src/app.js | pino-pretty",
     "test": "NODE_ENV=test jest",
     "test:coverage": "yarn test --coverage",
+    "test:coverage:show": "open coverage/lcov-report/index.html",
     "lint": "eslint src/",
     "infra:start": "cd docker && docker-compose up -d && cd ../",
     "docs": "npx jsdoc -r src/ -d ./docs",
