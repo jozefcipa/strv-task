@@ -12,6 +12,7 @@ const { httpCodes } = require('../utils/http')
  */
 const createContact = async ctx => {
   const input = ctx.request.body
+  input.user_id = ctx.user._id
   validate(input, newContactSchema)
   ctx.status = httpCodes.CREATED
   ctx.body = await operations.createContact(input)

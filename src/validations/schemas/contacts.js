@@ -12,7 +12,7 @@ const newContactSchema = {
     .required(),
   surname: Joi.string().min(2).max(50)
     .required(),
-  birthday: Joi.string().isoDate().required(),
+  birthday: Joi.string().isoDate(),
   address: Joi.object()
     .keys({
       street: Joi.string().min(3).max(50)
@@ -28,6 +28,7 @@ const newContactSchema = {
   phone: Joi.string().regex(phoneRegex),
   email: Joi.string().email().required(),
   note: Joi.string().max(500).allow(''),
+  user_id: Joi.string().required(),
 }
 
 module.exports = {
