@@ -12,7 +12,7 @@ const responseTimeMiddleware = () =>
     const start = Date.now()
     await next()
     const responseTime = `${Date.now() - start}ms`
-    ctx.set('X-ResponseTime', responseTime)
+    ctx.set('X-Response-Time', responseTime)
     logger.debug(`Response time: ${responseTime}`)
   }
 

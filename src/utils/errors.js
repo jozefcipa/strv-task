@@ -1,12 +1,7 @@
 /* eslint-disable max-classes-per-file */
 'use strict'
 
-const httpCodes = {
-  NOT_FOUND: 404,
-  BAD_REQUEST: 400,
-  UNAUTHORIZED: 401,
-  INTERNAL_ERROR: 500,
-}
+const { httpCodes } = require('./http')
 
 /**
  * ApiError base class
@@ -70,6 +65,5 @@ module.exports = {
   BadRequestError,
   UnathorizedError,
   InternalError,
-  httpCodes,
   notFoundHandler,
 }

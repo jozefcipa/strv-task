@@ -9,6 +9,7 @@ const routes = require('./routes')
 const koaTime = require('./middlewares/time')
 const koaErrors = require('./middlewares/errors')
 const { notFoundHandler } = require('./utils/errors')
+const firebase = require('./services/firebase')
 
 const services = {
   httpServer: null,
@@ -35,7 +36,11 @@ const start = async () => {
   logger.info(`Server listening on port ${config.server.port}`)
 
   // TODO: connect do DB
-  // TODO: initialize Firebase
+
+  // initialize Firebase
+  services.firebase = await firebase.init()
+  firebase.initDb(services.firebase)
+  logger.info('Firebase connection initialized')
 }
 
 const stop = async () => {
