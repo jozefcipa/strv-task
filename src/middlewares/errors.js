@@ -23,7 +23,7 @@ const handleErrorsMiddleware = () =>
 
       // prepare response error body
       const body = {
-        error: err.name,
+        error: err.message,
         code: responseError.httpCode,
       }
       if (!isEmpty(responseError.payload)) {

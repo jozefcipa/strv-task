@@ -17,6 +17,13 @@ const userSchema = {
     .required(),
 }
 
+const loginSchema = {
+  email: Joi.string().email().required(),
+  password: Joi.string().min(8).max(20)
+    .required(),
+}
+
 module.exports = {
   userSchema,
+  loginSchema,
 }

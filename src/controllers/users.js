@@ -2,7 +2,7 @@
 
 const operations = require('../operations/users')
 const { validate } = require('../validations')
-const { userSchema } = require('../validations/schemas/users')
+const { userSchema, loginSchema } = require('../validations/schemas/users')
 const { httpCodes } = require('../utils/http')
 
 const createUser = async ctx => {
@@ -13,8 +13,9 @@ const createUser = async ctx => {
 }
 
 const loginUser = async ctx => {
-  ctx.statusCode = 400
-  // TODO: implement
+  const input = ctx.request.body
+  validate(input, loginSchema)
+  ctx.body = await operations.authenticateUser(input)
 }
 
 module.exports = {

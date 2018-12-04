@@ -15,11 +15,6 @@ userSchema.query.byEmail = function(email) {
   return this.where({ email })
 }
 
-// Find user by email and password
-userSchema.query.byEmailAndPassword = function(email, password) {
-  return this.where({ email, password })
-}
-
 // index users by email
 userSchema.index({ email: 1 })
 

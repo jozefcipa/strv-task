@@ -25,7 +25,19 @@ module.exports = env => ({
     stdout: true,
     minLevel: 'debug',
   },
-  auth: {},
+  security: {
+    secret: process.env.AUTH_SECRET,
+    saltRounds: 10,
+    createOptions: {
+      expiresIn: 60 * 60,
+      algorithm: 'HS256',
+      issuer: `com.jozefcipa.addressbook-api.${env}`,
+    },
+    verifyOptions: {
+      algorithm: 'HS256',
+      issuer: `com.jozefcipa.addressbook-api.${env}`,
+    },
+  },
   firebase: {
     databaseUrl: process.env.FIREBASE_DB_URL,
     serviceAccount: {

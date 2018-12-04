@@ -7,9 +7,9 @@ const { httpCodes } = require('./http')
  * ApiError base class
  */
 class ApiError extends Error {
-  constructor(name, payload, httpCode) {
+  constructor(message, payload, httpCode) {
     super()
-    this.name = name
+    this.message = message
     this.payload = payload
     this.httpCode = httpCode
   }
@@ -19,8 +19,8 @@ class ApiError extends Error {
  * HTTP 404 NotFound Error class
  */
 class NotFoundError extends ApiError {
-  constructor(payload = {}, name = 'Not Found') {
-    super(name, payload, httpCodes.NOT_FOUND)
+  constructor(payload = {}, message = 'Not Found') {
+    super(message, payload, httpCodes.NOT_FOUND)
   }
 }
 
@@ -28,8 +28,8 @@ class NotFoundError extends ApiError {
  * HTTP 400 BadRequest Error class
  */
 class BadRequestError extends ApiError {
-  constructor(payload = {}, name = 'Bad Request') {
-    super(name, payload, httpCodes.BAD_REQUEST)
+  constructor(payload = {}, message = 'Bad Request') {
+    super(message, payload, httpCodes.BAD_REQUEST)
   }
 }
 
@@ -37,8 +37,8 @@ class BadRequestError extends ApiError {
  * HTTP 401 UnathorizedError Error class
  */
 class UnathorizedError extends ApiError {
-  constructor(payload = {}, name = 'Unauthorized') {
-    super(name, payload, httpCodes.UNAUTHORIZED)
+  constructor(payload = {}, message = 'Unauthorized') {
+    super(message, payload, httpCodes.UNAUTHORIZED)
   }
 }
 
@@ -46,8 +46,8 @@ class UnathorizedError extends ApiError {
  * HTTP 409 InternalError Error class
  */
 class ConflictError extends ApiError {
-  constructor(payload = {}, name = 'Conflict') {
-    super(name, payload, httpCodes.CONFLICT)
+  constructor(payload = {}, message = 'Conflict') {
+    super(message, payload, httpCodes.CONFLICT)
   }
 }
 
@@ -55,8 +55,8 @@ class ConflictError extends ApiError {
  * HTTP 500 InternalError Error class
  */
 class InternalError extends ApiError {
-  constructor(payload = {}, name = 'Internal Server Error') {
-    super(name, payload, httpCodes.INTERNAL_ERROR)
+  constructor(payload = {}, message = 'Internal Server Error') {
+    super(message, payload, httpCodes.INTERNAL_ERROR)
   }
 }
 
