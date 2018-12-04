@@ -3,6 +3,7 @@
 const Router = require('koa-router')
 const config = require('../config')
 const { createContact } = require('../controllers/contacts')
+const { createUser, loginUser } = require('../controllers/users')
 
 const router = new Router()
 
@@ -15,5 +16,9 @@ router.get('/', ctx => {
 
 // Contacts
 router.post('/contacts', createContact)
+
+// Users
+router.post('/users', createUser)
+router.post('/login', loginUser)
 
 module.exports = router.routes()

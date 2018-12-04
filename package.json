@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "nodemon src/app.js | pino-pretty",
     "test": "echo \"No tests yet\"",
-    "lint": "eslint src/"
+    "lint": "eslint src/",
+    "infra:start": "cd docker && docker-compose up -d && cd ../"
   },
   "engines": {
     "node": "v10.7.0"
@@ -33,6 +34,7 @@
     "koa-compress": "^3.0.0",
     "koa-helmet": "^4.0.0",
     "koa-router": "^7.4.0",
+    "mongoose": "^5.3.14",
     "pino": "^5.9.0",
     "ramda": "^0.26.1",
     "uuid": "^3.3.2"

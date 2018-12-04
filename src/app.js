@@ -3,6 +3,7 @@
 const Koa = require('koa')
 const koaCors = require('kcors')
 const koaBody = require('koa-body')
+const mongoose = require('mongoose')
 const config = require('./config')
 const logger = require('./utils/logger')
 const routes = require('./routes')
@@ -35,7 +36,9 @@ const start = async () => {
   })
   logger.info(`Server listening on port ${config.server.port}`)
 
-  // TODO: connect do DB
+  // connect do DB
+  services.db = await mongoose.connect(config.database.url, config.database.options)
+  logger.info('Connected to MongoDB')
 
   // initialize Firebase
   services.firebase = await firebase.init()
@@ -46,12 +49,13 @@ const start = async () => {
 const stop = async () => {
   logger.warn('Shutting down server')
   await services.httpServer.close()
+  await services.db.disconnect()
   logger.warn('Server is down')
 }
 
 start()
-  .then(() => logger.info('App is running'))
-  .catch(err => logger.error('An error occurred', err))
+  .then(() => logger.info('App is running 🎉'))
+  .catch(err => logger.error(`Error occurred: ${err.stack}`))
 
 process.once('SIGINT', stop)
 process.once('SIGTERM', stop)

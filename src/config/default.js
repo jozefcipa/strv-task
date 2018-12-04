@@ -13,7 +13,13 @@ module.exports = env => ({
   server: {
     port: process.env.PORT || 3000,
   },
-  database: {},
+  database: {
+    url: process.env.DB_URL,
+    options: {
+      autoIndex: false,
+      useNewUrlParser: true,
+    },
+  },
   logger: {
     enabled: true,
     stdout: true,

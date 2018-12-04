@@ -43,6 +43,15 @@ class UnathorizedError extends ApiError {
 }
 
 /**
+ * HTTP 409 InternalError Error class
+ */
+class ConflictError extends ApiError {
+  constructor(payload = {}, name = 'Conflict') {
+    super(name, payload, httpCodes.CONFLICT)
+  }
+}
+
+/**
  * HTTP 500 InternalError Error class
  */
 class InternalError extends ApiError {
@@ -65,5 +74,6 @@ module.exports = {
   BadRequestError,
   UnathorizedError,
   InternalError,
+  ConflictError,
   notFoundHandler,
 }
