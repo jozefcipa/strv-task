@@ -1,0 +1,48 @@
+{
+  "name": "addressbook-api",
+  "version": "1.0.0",
+  "main": "src/app.js",
+  "repository": "https://github.com/JozefCipa/strv-task.git",
+  "author": "Jozef Cipa <cipa.jozef@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon src/app.js | pino-pretty",
+    "test": "echo \"No tests yet\"",
+    "lint": "eslint src/"
+  },
+  "engines": {
+    "node": "v10.7.0"
+  },
+  "devDependencies": {
+    "@strv/eslint-config-javascript": "^9.1.0",
+    "eslint": "^5.9.0",
+    "husky": "^1.2.0",
+    "lint-staged": "^8.1.0",
+    "nodemon": "^1.18.7",
+    "pino-pretty": "^2.4.0"
+  },
+  "dependencies": {
+    "bcrypt": "^3.0.2",
+    "dotenv": "^6.1.0",
+    "kcors": "^2.2.2",
+    "koa": "^2.6.2",
+    "koa-body": "^4.0.4",
+    "koa-compress": "^3.0.0",
+    "koa-helmet": "^4.0.0",
+    "koa-router": "^7.4.0",
+    "pino": "^5.9.0",
+    "ramda": "^0.26.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn test && lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}
