@@ -11,7 +11,9 @@
     "test": "NODE_ENV=test jest",
     "test:coverage": "yarn test --coverage",
     "lint": "eslint src/",
-    "infra:start": "cd docker && docker-compose up -d && cd ../"
+    "infra:start": "cd docker && docker-compose up -d && cd ../",
+    "docs": "npx jsdoc -r src/ -d ./docs",
+    "docs:show": "open docs/index.html"
   },
   "engines": {
     "node": "v10.7.0"
@@ -21,6 +23,7 @@
     "eslint": "^5.9.0",
     "husky": "^1.2.0",
     "jest": "^23.6.0",
+    "jsdoc": "^3.5.5",
     "lint-staged": "^8.1.0",
     "nodemon": "^1.18.7",
     "pino-pretty": "^2.4.0"

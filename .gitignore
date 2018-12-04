@@ -2,6 +2,7 @@
 node_modules/
 docker/data
 coverage/
+docs/
 
 *.log
 .env
