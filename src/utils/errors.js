@@ -34,9 +34,9 @@ class BadRequestError extends ApiError {
 }
 
 /**
- * HTTP 401 UnathorizedError Error class
+ * HTTP 401 UnauthorizedError Error class
  */
-class UnathorizedError extends ApiError {
+class UnauthorizedError extends ApiError {
   constructor(payload = {}, message = 'Unauthorized') {
     super(message, payload, httpCodes.UNAUTHORIZED)
   }
@@ -72,7 +72,7 @@ module.exports = {
   ApiError,
   NotFoundError,
   BadRequestError,
-  UnathorizedError,
+  UnauthorizedError,
   InternalError,
   ConflictError,
   notFoundHandler,

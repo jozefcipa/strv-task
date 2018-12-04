@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { isEmpty } = require('ramda')
 const config = require('../config')
-const { UnathorizedError } = require('./errors')
+const { UnauthorizedError } = require('./errors')
 
 /**
  * Hashes password
@@ -53,7 +53,7 @@ const verifyAccessToken = async accessToken => {
     return result.data
   } catch (err) {
     if (err instanceof jwt.JsonWebTokenError) {
-      throw new UnathorizedError({}, err.message)
+      throw new UnauthorizedError({}, err.message)
     }
     throw err
   }

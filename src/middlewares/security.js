@@ -1,7 +1,7 @@
 /* eslint-disable dot-notation */
 'use strict'
 
-const { UnathorizedError } = require('../utils/errors')
+const { UnauthorizedError } = require('../utils/errors')
 const { parseJwtTokenFromHeader, verifyAccessToken } = require('../utils/security')
 
 const authenticated = async (ctx, next) => {
@@ -10,7 +10,7 @@ const authenticated = async (ctx, next) => {
 
   // check if token is provided
   if (!token) {
-    throw new UnathorizedError({}, 'Missing authorization header')
+    throw new UnauthorizedError({}, 'Missing authorization header')
   }
 
   // check token validity

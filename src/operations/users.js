@@ -2,7 +2,7 @@
 
 const repository = require('../repositories/users')
 const User = require('../database/models/user')
-const { NotFoundError, ConflictError, UnathorizedError } = require('../utils/errors')
+const { NotFoundError, ConflictError, UnauthorizedError } = require('../utils/errors')
 const security = require('../utils/security')
 
 const createUser = async input => {
@@ -27,7 +27,7 @@ const authenticateUser = async input => {
   // check password
   const verifiedPassword = await security.verifyPassword(input.password, user.password)
   if (!verifiedPassword) {
-    throw new UnathorizedError({}, 'Incorrect password')
+    throw new UnauthorizedError({}, 'Incorrect password')
   }
   // generate access token
   const tokenInfo = await security.generateAccessToken(user)
