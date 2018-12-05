@@ -1,0 +1,48 @@
+---
+sudo: required
+dist: trusty
+language: node_js
+node_js:
+- 11.0.0
+
+branches:
+  only:
+  - master
+
+cache:
+  directories:
+  - node_modules
+
+services:
+- docker
+
+env:
+  global:
+  - NODE_ENV=test
+
+install:
+- yarn install
+
+before_script:
+- yarn infra
+
+script:
+- yarn test:coverage
+
+after_success:
+- echo Uploaded 💪
+
+deploy:
+- provider: heroku
+  skip_cleanup: true
+  api_key:
+    secure: "ntXTeCZH8erCmLNe2vCFakxZaKHIdHMjkszeGSJaC6uoqohs6XSp8b3FrN1ToCZdCpa/vTTywr4nLY/mOcF3tO9S5rm6Ee0YMuGs1Ub1ArfeAjURuwxP3tOTMObd/O1AmSSimC6LvQQNjbKuwhdQKtpLCUtCky8zOeI+CArfEiKbvogW/PyEWJeS6q2NDtBncqaOe/yzHjZAqDY+QLGrAI6eQXkyYNCSMlr1vsrsi8qHa5TnS1V+uLCw0rW0OAaLA2pDFomi7RnTXfhMktycQaP4Df7YzGTiJnHfL9yQRqu0QOxOb8bP8DpvzxT16ONrB5DJP5BiBBj/a7VclJAnpGyB2mbLwkK5QDD6KJ7u12MPp/m+5vc9icPXKkfMt5ZdlM/fL5D2Ij5MKxhvgBawepwsDCyJklg55/ZGXiXLQFosoPhZA7Mw6SO0OAHv0ENaap1Nrw2WLjAAFXy2NgQe8JUFj+b4NlIyCLmkiXl7PBVzxZmVsDT8C5Jz5IO1KnJ1Lkya5LvLUXQNtqm1/Y1DcYVM9c3zas9vXFuibQF4m+gP+Xgms+ao/Kvy36DI/0y7hpqF4aulPSz/NfoiBrJU+8/p4zLCGRbiRe7b/bfhEFzsquA/GkLO0oo0ApkDr9TQmcPD43GnFCekLRh+MxGVdkO4wvcRN0iAsz+jdhPh0wI="
+  app: addressbook-api-strv
+  strategy: git
+  on:
+    branch:
+    - master
+    repo: jozefcipa/strv-task
+
+notifications:
+  email: false
