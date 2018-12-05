@@ -24,7 +24,7 @@ install:
 - yarn install
 
 before_script:
-- yarn infra
+- yarn infra:start
 
 script:
 - yarn test:coverage

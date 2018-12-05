@@ -2,6 +2,8 @@
 
 This is final project of 9 weeks **Node.js** workshop.
 
+[![Build Status](https://travis-ci.com/jozefcipa/strv-task.svg?token=s4QdpQx7n36q53UZ51Mk&branch=master)](https://travis-ci.com/jozefcipa/strv-task)
+
 #### Launching
 1. `git clone https://github.com/JozefCipa/strv-task.git`
 2. `cd strv-task`
