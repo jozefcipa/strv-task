@@ -3,7 +3,7 @@
 const Koa = require('koa')
 const koaCors = require('kcors')
 const koaBody = require('koa-body')
-const mongoose = require('mongoose')
+const db = require('./database')
 const config = require('./config')
 const logger = require('./utils/logger')
 const routes = require('./routes')
@@ -31,13 +31,14 @@ app.start = async () => {
   logger.info('Starting server')
 
   // start HTTP server
-  services.httpServer = await new Promise(resolve => {
-    const server = app.listen(config.server.port, () => resolve(server))
-  })
-  logger.info(`Server listening on port ${config.server.port}`)
-
+  if (require.main === module) {
+    services.httpServer = await new Promise(resolve => {
+      const server = app.listen(config.server.port, () => resolve(server))
+    })
+    logger.info(`Server listening on port ${config.server.port}`)
+  }
   // connect do DB
-  services.db = await mongoose.connect(config.database.url, config.database.options)
+  services.db = await db.mongo.connect()
   logger.info('Connected to MongoDB')
 
   // initialize Firebase
@@ -48,17 +49,19 @@ app.start = async () => {
 
 app.stop = async () => {
   logger.warn('Shutting down server')
-  await services.httpServer.close()
-  await services.db.disconnect()
+  if (services.httpServer !== null) {
+    await services.httpServer.close()
+  }
+  if (services.db !== null) {
+    await services.db.disconnect()
+  }
   logger.warn('Server is down')
 }
 
 // Launch app
-if (require.main === module) {
-  app.start()
-    .then(() => logger.info('App is running 🎉'))
-    .catch(err => logger.error(`Error occurred: ${err.stack}`))
-}
+app.start()
+  .then(() => logger.info('App is running 🎉'))
+  .catch(err => logger.error(`Error occurred: ${err.stack}`))
 
 process.once('SIGINT', () => app.stop())
 process.once('SIGTERM', () => app.stop())

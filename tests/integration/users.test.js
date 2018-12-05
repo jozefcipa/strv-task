@@ -4,9 +4,10 @@ const request = require('supertest-koa-agent')
 const app = require('../../src/app')
 const User = require('../../src/database/models/user')
 
-beforeAll(() =>
+beforeAll(async () => {
   // Clears the database
-  User.deleteMany({}))
+  await User.deleteMany({})
+})
 
 describe('POST /users', () => {
   const userData = {
