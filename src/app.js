@@ -27,7 +27,7 @@ app
   .use(routes)
   .use(notFoundHandler())
 
-const start = async () => {
+app.start = async () => {
   logger.info('Starting server')
 
   // start HTTP server
@@ -46,18 +46,21 @@ const start = async () => {
   logger.info('Firebase connection initialized')
 }
 
-const stop = async () => {
+app.stop = async () => {
   logger.warn('Shutting down server')
   await services.httpServer.close()
   await services.db.disconnect()
   logger.warn('Server is down')
 }
 
-start()
-  .then(() => logger.info('App is running 🎉'))
-  .catch(err => logger.error(`Error occurred: ${err.stack}`))
+// Launch app
+if (require.main === module) {
+  app.start()
+    .then(() => logger.info('App is running 🎉'))
+    .catch(err => logger.error(`Error occurred: ${err.stack}`))
+}
 
-process.once('SIGINT', stop)
-process.once('SIGTERM', stop)
+process.once('SIGINT', () => app.stop())
+process.once('SIGTERM', () => app.stop())
 
 module.exports = app

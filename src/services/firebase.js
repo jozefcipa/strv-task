@@ -3,10 +3,6 @@
 const firebaseAdmin = require('firebase-admin')
 const config = require('../config')
 
-/**
- * Firestore instance
- * @type {null}
- */
 let db = null
 
 /**

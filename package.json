@@ -67,7 +67,8 @@
       "config/"
     ],
     "collectCoverageFrom": [
-      "src/**/*.js"
+      "src/**/*.js",
+      "!src/config/env/*.js"
     ]
   }
 }

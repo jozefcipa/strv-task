@@ -65,7 +65,7 @@ const parseJwtTokenFromHeader = header => {
   if (!header || isEmpty(header)) {
     return null
   }
-  const mask = /jwt ([a-zA-Z0-9\.-]+)/u
+  const mask = /jwt (.+)/u
   return header.match(mask)[1]
 }
 

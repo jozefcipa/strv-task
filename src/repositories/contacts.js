@@ -1,6 +1,6 @@
 'use strict'
 
-const { getDb } = require('../services/firebase')
+const firebase = require('../services/firebase')
 const { generateID } = require('../utils')
 
 const COLLECTION_NAME = 'contacts'
@@ -10,9 +10,12 @@ const COLLECTION_NAME = 'contacts'
  * @param {*} input Input data
  * @returns {*}
  */
-const save = input => {
-  const docRef = getDb().collection(COLLECTION_NAME).doc(generateID())
-  return docRef.set(input)
+const save = async input => {
+  const docRef = firebase.getDb().collection(COLLECTION_NAME).doc(generateID())
+  await docRef.set(input)
+  return {
+    created: 1,
+  }
 }
 
 module.exports = {
