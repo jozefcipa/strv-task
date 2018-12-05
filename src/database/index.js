@@ -9,8 +9,15 @@ const config = require('../config')
  */
 const connect = () => mongoose.connect(config.database.url, config.database.options)
 
+/**
+ * Disconnects from MongoDB
+ * @returns {Promise}
+ */
+const disconnect = () => mongoose.disconnect()
+
 module.exports = {
   mongo: {
     connect,
+    disconnect,
   },
 }

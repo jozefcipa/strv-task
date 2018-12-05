@@ -3,10 +3,15 @@
 const request = require('supertest-koa-agent')
 const app = require('../../src/app')
 const User = require('../../src/database/models/user')
+const { mongo } = require('../../src/database')
 
 beforeAll(async () => {
   // Clears the database
   await User.deleteMany({})
+})
+
+afterAll(async () => {
+  await mongo.disconnect()
 })
 
 describe('POST /users', () => {

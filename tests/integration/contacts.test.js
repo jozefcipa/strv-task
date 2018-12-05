@@ -4,6 +4,7 @@ const request = require('supertest-koa-agent')
 const app = require('../../src/app')
 const security = require('../../src/utils/security')
 const { stubFirebase } = require('../stubs/firebase')
+const { mongo } = require('../../src/database')
 
 const contact = {
   name: 'John',
@@ -31,6 +32,10 @@ beforeAll(async () => {
     email: 'jamie69@hotmail.com',
     _id: 'adfj9230fasdfk2',
   }).accessToken
+})
+
+afterAll(async () => {
+  await mongo.disconnect()
 })
 
 // test creating a new contact

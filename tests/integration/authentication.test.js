@@ -6,6 +6,7 @@ const app = require('../../src/app')
 const User = require('../../src/database/models/user')
 const security = require('../../src/utils/security')
 const { stubFirebase } = require('../stubs/firebase')
+const { mongo } = require('../../src/database')
 
 const userData = {
   name: 'John',
@@ -22,6 +23,10 @@ beforeAll(async () => {
   const user = new User(userData)
   user.password = await security.hash(userData.password)
   await user.save()
+})
+
+afterAll(async () => {
+  await mongo.disconnect()
 })
 
 // test authentication - login, access token
