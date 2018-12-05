@@ -10,6 +10,7 @@ const logger = require('./utils/logger')
 const routes = require('./routes')
 const koaTime = require('./middlewares/time')
 const koaErrors = require('./middlewares/errors')
+const { omitSensitiveDataFromResponse } = require('./middlewares/security')
 const { notFoundHandler } = require('./utils/errors')
 const firebase = require('./services/firebase')
 
@@ -22,6 +23,7 @@ const services = {
 const app = new Koa()
 app
   .use(koaTime())
+  .use(omitSensitiveDataFromResponse())
   .use(koaErrors())
   .use(koaCors())
   .use(koaHelmet())

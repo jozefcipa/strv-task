@@ -36,10 +36,9 @@ describe('POST /users', () => {
       '_id',
     ]))
 
-    // TODO: uncomment
-    // expect(Object.keys(res.body)).not.toEqual(expect.arrayContaining([
-    //   'password',
-    // ]))
+    expect(Object.keys(res.body)).not.toEqual(expect.arrayContaining([
+      'password',
+    ]))
   })
 
   test('Returns 400 when invalid data provided', async () => {
