@@ -2,7 +2,7 @@
 
 This is final project of 9 weeks **Node.js** workshop operated by [STRV](https://www.strv.com)
 
-[![Build Status](https://travis-ci.com/jozefcipa/strv-task.svg?token=s4QdpQx7n36q53UZ51Mk&branch=master)](https://travis-ci.com/jozefcipa/strv-task) [![HitCount](http://hits.dwyl.com/jozefcipa/strv-task.svg)](http://hits.dwyl.com/jozefcipa/strv-task)
+[![Build Status](https://travis-ci.com/jozefcipa/strv-task.svg?token=s4QdpQx7n36q53UZ51Mk&branch=master)](https://travis-ci.com/jozefcipa/strv-task) 
 
 #### Setup
 1. `git clone https://github.com/jozefcipa/strv-task.git`
