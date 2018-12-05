@@ -4,12 +4,12 @@ RUN apk add --no-cache --update g++ python2 make
 
 WORKDIR /app
 
-COPY ../package.json /app/
-COPY ../yarn.lock /app/
+COPY package.json /app/
+COPY yarn.lock /app/
 
 RUN yarn install --production
 
-COPY ../ /app/
+COPY . /app/
 
 ENV NODE_ENV=production
 
