@@ -3,7 +3,7 @@
 const request = require('supertest-koa-agent')
 const app = require('../../src/app')
 const security = require('../../src/utils/security')
-const { stubFirebase } = require('../mocks/firebase')
+const { stubFirebase } = require('../stubs/firebase')
 
 const contact = {
   name: 'John',

@@ -5,7 +5,7 @@ const R = require('ramda')
 const app = require('../../src/app')
 const User = require('../../src/database/models/user')
 const security = require('../../src/utils/security')
-const { stubFirebase } = require('../mocks/firebase')
+const { stubFirebase } = require('../stubs/firebase')
 
 const userData = {
   name: 'John',
