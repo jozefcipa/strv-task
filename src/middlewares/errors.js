@@ -3,6 +3,7 @@
 const { isEmpty } = require('ramda')
 const logger = require('../utils/logger')
 const errors = require('../utils/errors')
+const config = require('../config')
 
 const handleErrorsMiddleware = () =>
   async (ctx, next) => {
@@ -30,7 +31,7 @@ const handleErrorsMiddleware = () =>
         body.payload = responseError.payload
       }
       // check if error stack should be provided
-      if (['local', 'test', 'staging'].includes('local')) {
+      if (['local', 'test', 'staging'].includes(config.env)) {
         body.stack = err.stack
       }
 
