@@ -12,7 +12,7 @@
     "test:coverage": "yarn test --coverage",
     "test:coverage:show": "open coverage/lcov-report/index.html",
     "lint": "eslint src/",
-    "infra:start": "cd docker && docker-compose up -d && cd ../",
+    "infra:start": "docker-compose up -d",
     "docs": "npx jsdoc -r src/ -d ./docs",
     "docs:show": "open docs/index.html"
   },
