@@ -17,7 +17,7 @@
     "docs:show": "open docs/index.html"
   },
   "engines": {
-    "node": "v10.7.0"
+    "node": "v11.0.0"
   },
   "devDependencies": {
     "@strv/eslint-config-javascript": "^9.1.0",
