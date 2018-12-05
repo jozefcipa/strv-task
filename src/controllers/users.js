@@ -8,7 +8,7 @@ const { httpCodes } = require('../utils/http')
 const createUser = async ctx => {
   const input = ctx.request.body
   validate(input, userSchema)
-  ctx.statusCode = httpCodes.CREATED
+  ctx.status = httpCodes.CREATED
   ctx.body = await operations.createUser(input)
 }
 

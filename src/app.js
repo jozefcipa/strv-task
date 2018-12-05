@@ -18,19 +18,19 @@ const services = {
   firebase: null,
 }
 
+const app = new Koa()
+app
+  .use(koaTime())
+  .use(koaErrors())
+  .use(koaCors())
+  .use(koaBody())
+  .use(routes)
+  .use(notFoundHandler())
+
 const start = async () => {
   logger.info('Starting server')
 
-  // Start HTTP server
-  const app = new Koa()
-  app
-    .use(koaTime())
-    .use(koaErrors())
-    .use(koaCors())
-    .use(koaBody())
-    .use(routes)
-    .use(notFoundHandler())
-
+  // start HTTP server
   services.httpServer = await new Promise(resolve => {
     const server = app.listen(config.server.port, () => resolve(server))
   })
@@ -59,3 +59,5 @@ start()
 
 process.once('SIGINT', stop)
 process.once('SIGTERM', stop)
+
+module.exports = app
