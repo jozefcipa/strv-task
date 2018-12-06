@@ -4,6 +4,10 @@ const operations = require('../../operations/contacts')
 
 module.exports = {
   Mutation: {
-    createContact: (root, args) => operations.createContact(args.input),
+    createContact: async (root, args, ctx) => {
+      const user = await ctx.authenticate()
+      args.userId = user._id
+      return operations.createContact(args.input)
+    },
   },
 }

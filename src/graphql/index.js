@@ -1,10 +1,12 @@
+/* eslint-disable dot-notation */
 'use strict'
 
 const { ApolloServer } = require('apollo-server-koa')
 const config = require('../config')
 const logger = require('../utils/logger')
-const { typeDefs, resolvers } = require('./schema')
 const { formatResponseError } = require('../utils/errors')
+const { authenticateByToken } = require('../utils/security')
+const { typeDefs, resolvers } = require('./schema')
 
 const errHandler = err => {
   // if (err.name === 'GraphQLError') {
@@ -19,6 +21,15 @@ const errHandler = err => {
   return responseError
 }
 
+const makeContext = ({ ctx }) => {
+  const accessToken = ctx.request.header['authorization']
+  return {
+    authenticate() {
+      return authenticateByToken(accessToken)
+    },
+  }
+}
+
 /**
  * Intializes GraphQL
  * @param {Koa app} app Koa instance
@@ -31,6 +42,7 @@ const initializeGraphQL = app => {
     debug: config.graphql.playground.enabled,
     introspection: config.graphql.playground.enabled,
     playground: config.graphql.playground.enabled ? config.graphql.playground : false,
+    context: makeContext,
     formatError: errHandler,
   })
 

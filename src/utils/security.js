@@ -40,7 +40,8 @@ const generateAccessToken = user => {
 /**
  * Verifies JWT token
  * @param {string} accessToken Access token provided by user
- * @returns {User}
+ * @returns {Promise<User>}
+ * @throws {UnauthorizedError}
  */
 const verifyAccessToken = async accessToken => {
   try {
@@ -69,10 +70,29 @@ const parseJwtTokenFromHeader = header => {
   return header.match(mask)[1]
 }
 
+/**
+ * Verifies JWT token from header and returns User object or error
+ * @param {string} authHeader Authorization header string
+ * @returns {Promise<User>}
+ * @throw {UnauthorizedError}
+ */
+const authenticateByToken = authHeader => {
+  const token = parseJwtTokenFromHeader(authHeader)
+
+  // check if token is provided
+  if (!token) {
+    throw new UnauthorizedError({}, 'Missing authorization header')
+  }
+
+  // check token validity
+  return verifyAccessToken(token)
+}
+
 module.exports = {
   hash,
   verifyPassword,
   generateAccessToken,
   verifyAccessToken,
   parseJwtTokenFromHeader,
+  authenticateByToken,
 }
