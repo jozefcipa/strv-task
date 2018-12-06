@@ -5,4 +5,9 @@ module.exports = {
     stdout: false,
     minLevel: 'info',
   },
+  graphql: {
+    playground: {
+      enabled: false,
+    },
+  },
 }

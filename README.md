@@ -4,7 +4,7 @@ This is final project of 9 weeks **Node.js** workshop operated by [STRV](https:/
 
 [![Build Status](https://travis-ci.com/jozefcipa/strv-task.svg?token=s4QdpQx7n36q53UZ51Mk&branch=master)](https://travis-ci.com/jozefcipa/strv-task) 
 
-Live demo at [https://addressbook-api-strv.herokuapp.com]()
+Live demo at [https://addressbook-api-strv.herokuapp.com](https://addressbook-api-strv.herokuapp.com)
 
 #### Setup
 1. `git clone https://github.com/jozefcipa/strv-task.git`
@@ -13,11 +13,15 @@ Live demo at [https://addressbook-api-strv.herokuapp.com]()
 4. `yarn dev`
 5. API is available on address `http://localhost:3000` 🎉
 
-### Endpoints
+#### Endpoints
 ##### REST
 - `POST /login` Authenticates user by email and password
 - `POST /users` Registers new user
 - `POST /contacts` **(protected)** Creates new contact for user
+
+##### GraphQL
+- `POST /graphql`
+- `GET /graphql` GraphQL playground, in development environment
 
 #### Tests
 
@@ -31,11 +35,12 @@ Live demo at [https://addressbook-api-strv.herokuapp.com]()
 
 #### Used technologies
 - Node.js
+- Jest
 - Docker
 - MongoDB
 - Heroku
 - Travis
-- Jest
+- Firebase
 - JWT token authentication
 
 <hr>

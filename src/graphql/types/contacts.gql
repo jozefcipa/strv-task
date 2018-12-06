@@ -1,0 +1,23 @@
+ input ContactInput {
+    name: String!
+    surname: String!
+    email: String!
+    phone: String
+    note: String
+    address: Address!
+ }
+
+ input Address {
+     street: String!
+     city: String!
+     country: String!
+     zip: String!
+ }
+
+ type ContactResponse {
+   created: Int!
+ }
+
+ type Mutation {
+   createContact(input: ContactInput!): ContactResponse!
+ }

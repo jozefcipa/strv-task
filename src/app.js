@@ -13,6 +13,7 @@ const koaErrors = require('./middlewares/errors')
 const { omitSensitiveDataFromResponse } = require('./middlewares/security')
 const { notFoundHandler } = require('./utils/errors')
 const firebase = require('./services/firebase')
+const graphQL = require('./graphql')
 
 const services = {
   httpServer: null,
@@ -21,6 +22,10 @@ const services = {
 }
 
 const app = new Koa()
+
+// graphQL
+graphQL.initializeGraphQL(app)
+
 app
   .use(koaTime())
   .use(omitSensitiveDataFromResponse())

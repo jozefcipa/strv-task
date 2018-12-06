@@ -1,0 +1,33 @@
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input RegisterInput {
+    name: String!
+    surname: String!
+    email: String!
+    password: String!
+    passwordAgain: String!
+}
+
+type User {
+    _id: String!
+    name: String!
+    surname: String!
+    email: String!
+}
+
+type Token {
+    accessToken: String!
+}
+
+type LoginResponse {
+  user: User!
+  tokenInfo: Token!
+}
+
+type Mutation {
+  login(input: LoginInput!): LoginResponse!
+  registerUser(input: RegisterInput!): User!
+}

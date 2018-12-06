@@ -1,0 +1,8 @@
+type ApiResponse {
+    name: String!
+    version: String!
+}
+
+type Query {
+  api: ApiResponse!
+}

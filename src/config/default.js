@@ -53,4 +53,14 @@ module.exports = env => ({
       client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL,
     },
   },
+  graphql: {
+    playground: {
+      enabled: true,
+      settings: {
+        'editor.theme': 'light',
+        'editor.cursorShape': 'line',
+        'editor.fontSize': 16,
+      },
+    },
+  },
 })

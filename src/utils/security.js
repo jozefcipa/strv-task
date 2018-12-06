@@ -11,7 +11,7 @@ const { UnauthorizedError } = require('./errors')
 /**
  * Hashes password
  * @param {string} password Password string
- * @returns {*}
+ * @returns {string} Hashed password
  */
 const hash = password => bcrypt.hash(password, config.security.saltRounds)
 
@@ -19,7 +19,7 @@ const hash = password => bcrypt.hash(password, config.security.saltRounds)
  * Verifies password against hash
  * @param {string} password Password to compare
  * @param {string} hashedPassword Hash of password
- * @returns {*}
+ * @returns {boolean} True if password match
  */
 const verifyPassword = (password, hashedPassword) => bcrypt.compare(password, hashedPassword)
 
@@ -40,7 +40,7 @@ const generateAccessToken = user => {
 /**
  * Verifies JWT token
  * @param {string} accessToken Access token provided by user
- * @returns {*}
+ * @returns {User}
  */
 const verifyAccessToken = async accessToken => {
   try {
@@ -59,7 +59,7 @@ const verifyAccessToken = async accessToken => {
 /**
  * Parses jwt access token from Authorization header
  * @param {string} header Authorization header string
- * @returns {*}
+ * @returns {string}
  */
 const parseJwtTokenFromHeader = header => {
   if (!header || isEmpty(header)) {
