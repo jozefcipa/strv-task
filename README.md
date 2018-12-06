@@ -8,10 +8,12 @@ Live demo at [https://addressbook-api-strv.herokuapp.com](https://addressbook-ap
 
 #### Setup
 1. `git clone https://github.com/jozefcipa/strv-task.git`
-2. `cd strv-task`
-3. `yarn infra:start`
-4. `yarn dev`
-5. API is available on address `http://localhost:3000` 🎉
+1. `cd strv-task`
+1. `cp .env.example .env` Set environment variables  
+1. `yarn install`
+1. `yarn infra:start`
+1. `yarn dev`
+1. API is available on address `http://localhost:3000` 🎉
 
 #### Endpoints
 ##### REST
