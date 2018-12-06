@@ -46,7 +46,7 @@ app.start = async () => {
   logger.info('Connected to MongoDB')
 
   // initialize Firebase
-  services.firebase = await firebase.init()
+  services.firebase = firebase.init()
   firebase.initDb(services.firebase)
   logger.info('Firebase connection initialized')
 }
