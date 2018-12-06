@@ -1,6 +1,7 @@
 /* eslint-disable max-classes-per-file */
 'use strict'
 
+const { isEmpty } = require('ramda')
 const { httpCodes } = require('./http')
 
 /**
@@ -12,6 +13,7 @@ class ApiError extends Error {
     this.message = message
     this.payload = payload
     this.httpCode = httpCode
+    this.apiError = true
   }
 }
 
@@ -68,6 +70,35 @@ const notFoundHandler = () => () => {
   throw new NotFoundError()
 }
 
+/**
+ * Formats Error to response JSON format
+ * @param {Error|ApiError} err Error object
+ * @param {string} env Environment
+ * @returns {{}} Response error object
+ */
+const formatResponseError = (err, env) => {
+  let errorObject
+  if (err instanceof ApiError || err.apiError) {
+    errorObject = err
+  } else {
+    // otherwise we return HTTP 500 error
+    errorObject = new InternalError()
+  }
+  // prepare response error
+  const responseError = {
+    error: errorObject.message,
+    code: errorObject.httpCode,
+  }
+  if (!isEmpty(errorObject.payload)) {
+    responseError.payload = errorObject.payload
+  }
+  // check if error stack should be exposed
+  if (env !== 'production') {
+    responseError.stacktrace = err.stacktrace || err.stack
+  }
+  return responseError
+}
+
 module.exports = {
   ApiError,
   NotFoundError,
@@ -76,4 +107,5 @@ module.exports = {
   InternalError,
   ConflictError,
   notFoundHandler,
+  formatResponseError,
 }

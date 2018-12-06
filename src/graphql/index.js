@@ -4,16 +4,19 @@ const { ApolloServer } = require('apollo-server-koa')
 const config = require('../config')
 const logger = require('../utils/logger')
 const { typeDefs, resolvers } = require('./schema')
+const { formatResponseError } = require('../utils/errors')
 
-const formatError = err => {
-  const isDevelopment = ['local', 'test', 'staging'].includes(config.env)
-
-  logger.error(err)
-  return {
-    error: err.extensions.exception.message,
-    httpCode: err.extensions.exception.httpCode,
-    stack: isDevelopment && err.extensions.exception.stacktrace,
-  }
+const errHandler = err => {
+  // if (err.name === 'GraphQLError') {
+  //   return err
+  // }
+  const responseError = formatResponseError(err.extensions.exception, config.env)
+  // log error
+  logger.error(JSON.stringify({
+    ...responseError,
+    stack: err.stack,
+  }))
+  return responseError
 }
 
 /**
@@ -28,7 +31,7 @@ const initializeGraphQL = app => {
     debug: config.graphql.playground.enabled,
     introspection: config.graphql.playground.enabled,
     playground: config.graphql.playground.enabled ? config.graphql.playground : false,
-    formatError,
+    formatError: errHandler,
   })
 
   // Apply Apollo middleware

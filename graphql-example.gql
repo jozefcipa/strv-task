@@ -1,0 +1,61 @@
+mutation loginUser($login:LoginInput!) {
+ login(input:$login) {
+    user {
+      _id
+      name
+      surname
+    },
+    tokenInfo{
+      accessToken
+    }
+  }
+}
+
+mutation addNewUser($register:RegisterInput!) {
+ registerUser(input:$register) {
+    _id
+    name
+    surname
+  }
+}
+
+mutation addNewContact($contact:ContactInput!) {
+ createContact(input:$contact) {
+    created
+  }
+}
+
+query apiInfo{
+  api {
+    name
+    version
+  }
+}
+
+
+# Variables
+{
+  "login":{
+    "email":"cipajozef@gmail.com",
+    "password":"password"
+  },
+  "register":{
+    "name":"novy",
+    "surname":"pouzivatel",
+    "email":"novy.pouzivatel+2@gmail.com",
+    "password":"noveheslo",
+    "passwordAgain": "novehesloooo"
+  },
+  "contact":{
+    "name":"novy",
+    "surname":"kontakt",
+    "email":"novy.pouzivatel+2@gmail.com",
+    "note":"poznamka",
+    "address":{
+      "street":"Hlavna 9",
+      "city":"Praha",
+      "zip":"03829",
+      "country":"Czechia"
+    }
+  }
+}
