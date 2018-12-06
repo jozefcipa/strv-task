@@ -53,3 +53,40 @@ describe('POST /contacts', () => {
   })
 })
 
+describe('GraphQL contacts mutation', () => {
+  test('createContact mutation', async () => {
+    const query = {
+      operationName: 'addNewContact',
+      variables: {
+        contact: {
+          name: 'novy',
+          surname: 'kontakt',
+          email: 'novy.pouzivatel+2@gmail.com',
+          note: 'poznamka',
+          address: { street: 'Hlavna 9', city: 'Praha', zip: '03829', country: 'Czechia' },
+        },
+      },
+      query: `
+        mutation addNewContact($contact: ContactInput!) {
+          createContact(input: $contact) {
+            created
+          }
+        }`,
+    }
+
+    const result = {
+      data: {
+        createContact: {
+          created: 1,
+        },
+      },
+    }
+    const res = await request(app)
+      .post('/graphql')
+      .set('Authorization', `jwt ${accessToken}`)
+      .send(query)
+      .expect(200)
+
+    expect(res.body).toMatchObject(result)
+  })
+})

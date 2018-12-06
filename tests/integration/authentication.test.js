@@ -65,3 +65,44 @@ describe('POST /login', () => {
   })
 })
 
+describe('GraphQL login', () => {
+  test('login mutation', async () => {
+    const query = {
+      operationName: 'loginUser',
+      variables: {
+        login: {
+          email: userData.email,
+          password: userData.password,
+        },
+      },
+      query: `
+        mutation loginUser($login: LoginInput!) {
+          login(input: $login) {
+            user {
+              name
+              surname
+              email
+            }
+          }
+        }`,
+    }
+
+    const result = {
+      data: {
+        login: {
+          user: R.omit(['password'], userData),
+        },
+      },
+    }
+
+    const res = await request(app)
+      .post('/graphql')
+      .send(query)
+      .expect(200)
+
+    // verify response data
+    expect(res.body).toMatchObject(result)
+    // verify password is not in response
+    expect(res.body.data.login).not.toHaveProperty('password')
+  })
+})
